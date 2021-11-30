@@ -5,6 +5,7 @@ const port = 3000;
 
 const { mongoURI } = require('./config/key.js');
 
+// MongoDB 연결
 mongoose
   .connect(mongoURI)
   .then(() => console.log('MongoDB Connected!!'))
