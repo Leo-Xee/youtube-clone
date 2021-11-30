@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const userSchema = new Schema({
   name: {
     type: String,
-    maxlength: 50,
+    maxLength: 50,
   },
   email: {
     type: String,
@@ -11,8 +11,8 @@ const userSchema = new Schema({
     unique: 1,
   },
   password: {
-    typs: String,
-    minlength: 5,
+    type: String,
+    minlength: 6,
   },
   lastname: {
     type: String,
