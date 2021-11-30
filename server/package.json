@@ -2,10 +2,17 @@
   "name": "youtube-clone-server",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "author": "leo-xee",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "mongoose": "^6.0.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
