@@ -6,6 +6,7 @@ const port = 3000;
 
 const { mongoURI } = require('./config/key.js');
 const { User } = require('./models/User.js');
+const { auth } = require('./middleware/auth');
 
 // express 4.16이상 부터 bodyParser가 포함되기 때문에 따로 설치할 필요가 없음.
 app.use(express.json());
@@ -64,6 +65,20 @@ app.post('/api/users/login', (req, res) => {
         });
       });
     });
+  });
+});
+
+// 유저 인증 (auth: 미들웨어)
+app.get('/api/users/auth', auth, (req, res) => {
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image,
   });
 });
 
