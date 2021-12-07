@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "backend": "nodemon index.js",
+    "dev": "concurrently \"yarn --cwd backend start\" \"yarn --cwd ../front start\""
   },
   "author": "leo-xee",
   "license": "MIT",
@@ -15,6 +17,7 @@
     "mongoose": "^6.0.14"
   },
   "devDependencies": {
+    "concurrently": "^6.4.0",
     "nodemon": "^2.0.15"
   }
 }

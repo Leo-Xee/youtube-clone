@@ -1,15 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../../_actions/user_action';
 
-export default function RegisterPage() {
-  const [Name, setName] = useState('');
+export default function LoginPage(props) {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-  const [PasswordConfirm, setPasswordConfirm] = useState('');
+  const dispatch = useDispatch();
 
-  const onNameHandler = (e) => {
-    setName(e.currentTarget.value);
-  };
   const onEmailHandler = (e) => {
     setEmail(e.currentTarget.value);
   };
@@ -17,13 +14,23 @@ export default function RegisterPage() {
   const onPasswordHandler = (e) => {
     setPassword(e.currentTarget.value);
   };
-  const onPasswordConfirmHandler = (e) => {
-    setPasswordConfirm(e.currentTarget.value);
-  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(Email, Password);
+
+    let body = {
+      email: Email,
+      password: Password,
+    };
+
+    dispatch(loginUser(body)).then((res) => {
+      if (res.payload.loginSuccess) {
+        props.history.push('/');
+      } else {
+        alert('Login Error');
+      }
+    });
   };
 
   return (
@@ -40,9 +47,6 @@ export default function RegisterPage() {
         onSubmit={onSubmitHandler}
         style={{ display: 'flex', flexDirection: 'column' }}
       >
-        <label>Name</label>
-        <input type="text" value={Name} onChange={onNameHandler}></input>
-        <br />
         <label>Email</label>
         <input type="text" value={Email} onChange={onEmailHandler}></input>
         <br />
@@ -53,14 +57,7 @@ export default function RegisterPage() {
           onChange={onPasswordHandler}
         ></input>
         <br />
-        <label>PasswordConfirm</label>
-        <input
-          type="password"
-          value={PasswordConfirm}
-          onChange={onPasswordConfirmHandler}
-        ></input>
-        <br />
-        <button>Sign Up</button>
+        <button>Login</button>
       </form>
     </div>
   );
