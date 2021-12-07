@@ -15,9 +15,16 @@ export function registerUser(dataToSubmit) {
   const request = axios
     .post('/api/users/register', dataToSubmit)
     .then((res) => res.data);
-
   return {
     type: SIGN_UP_USER,
-    payload: request, // {success: true}
+    payload: request,
+  };
+}
+
+export function logoutUser() {
+  const request = axios.get('/api/users/logout').then((res) => res.data);
+  return {
+    type: SIGN_UP_USER,
+    payload: request,
   };
 }
