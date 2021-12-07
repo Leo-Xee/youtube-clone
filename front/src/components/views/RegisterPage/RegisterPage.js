@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../../_actions/user_action';
 
-export default function RegisterPage() {
+export default function RegisterPage(props) {
   const [Name, setName] = useState('');
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [PasswordConfirm, setPasswordConfirm] = useState('');
+  const dispatch = useDispatch();
 
   const onNameHandler = (e) => {
     setName(e.currentTarget.value);
@@ -24,6 +27,23 @@ export default function RegisterPage() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(Email, Password);
+
+    if (Password !== PasswordConfirm) {
+      alert('Password is not match PasswordConfirm');
+      return;
+    } else {
+      let body = {
+        name: Name,
+        email: Email,
+        password: Password,
+      };
+
+      dispatch(registerUser(body)).then((res) => {
+        if (res.payload.success) {
+          props.history.push('/');
+        }
+      });
+    }
   };
 
   return (
