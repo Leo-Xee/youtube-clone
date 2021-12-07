@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../../_actions/user_action';
+import { withRouter } from 'react-router';
 
-export default function LandingPage(props) {
+function LandingPage(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function LandingPage(props) {
     e.preventDefault();
     dispatch(logoutUser()).then((res) => {
       if (res.payload.success) {
-        props.history.push('/');
+        props.history.push('/login');
       } else {
         alert('Failed to logout');
       }
@@ -37,3 +38,5 @@ export default function LandingPage(props) {
     </div>
   );
 }
+
+export default withRouter(LandingPage);
