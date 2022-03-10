@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router';
 import { loginUser } from '../../../_actions/user_action';
 
-export default function LoginPage(props) {
+function LoginPage(props) {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -62,3 +63,5 @@ export default function LoginPage(props) {
     </div>
   );
 }
+
+export default withRouter(LoginPage);

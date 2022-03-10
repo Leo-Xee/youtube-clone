@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router';
 import { registerUser } from '../../../_actions/user_action';
 
-export default function RegisterPage(props) {
+function RegisterPage(props) {
   const [Name, setName] = useState('');
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
@@ -85,3 +86,5 @@ export default function RegisterPage(props) {
     </div>
   );
 }
+
+export default withRouter(RegisterPage);
